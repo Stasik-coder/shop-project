@@ -8,11 +8,6 @@ function Login() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const toggleTheme = () => {
-    document.body.className =
-      document.body.className === "light" ? "dark" : "light";
-  };
-
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
@@ -28,9 +23,10 @@ function Login() {
 
       if (data.token) {
         localStorage.setItem("token", data.token);
-        navigate("/posts");
+        localStorage.setItem("user", JSON.stringify(data.user));
+        navigate("/products");
       } else {
-        setError("Invalid email or password");
+        setError(data.error || "Invalid email or password");
       }
     } catch {
       setError("Server error. Try again.");
@@ -38,49 +34,46 @@ function Login() {
   };
 
   return (
-    <>
-      <div className="theme-toggle" onClick={toggleTheme}>
-        🌙 Theme
-      </div>
+    <div className="auth-container">
+      <h2>Welcome Back 👋</h2>
+      <p style={{ textAlign: "center", marginBottom: "18px", opacity: 0.85 }}>
+        Welcome to Cocacola shop
+      </p>
 
-      <div className="auth-container">
-        <h2>Welcome Back 👋</h2>
+      {error && <div className="error">{error}</div>}
 
-        {error && <div className="error">{error}</div>}
+      <form onSubmit={handleLogin}>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
 
-        <form onSubmit={handleLogin}>
+        <div className="input-group">
           <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type={show ? "text" : "password"}
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
-
-          <div className="input-group">
-            <input
-              type={show ? "text" : "password"}
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <span
-              className="toggle-password"
-              onClick={() => setShow(!show)}
-            >
-              {show ? "🙈" : "👁"}
-            </span>
-          </div>
-
-          <button type="submit">Login</button>
-        </form>
-
-        <div className="link">
-          No account? <Link to="/register">Register</Link>
+          <span
+            className="toggle-password"
+            onClick={() => setShow(!show)}
+          >
+            {show ? "🙈" : "👁"}
+          </span>
         </div>
+
+        <button type="submit">Login</button>
+      </form>
+
+      <div className="link">
+        No account? <Link to="/register">Register</Link>
       </div>
-    </>
+    </div>
   );
 }
 

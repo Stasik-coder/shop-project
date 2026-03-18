@@ -1,8 +1,15 @@
 import { Routes, Route } from "react-router-dom";
+
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Posts from "./pages/Posts";
+import Products from "./pages/Post";
+import AddProduct from "./pages/AddProduct";
+import EditProduct from "./pages/EditProduct";
+import AdminPanel from "./pages/AdminPanel";
 import PrivateRoute from "./components/PrivateRoute";
+import ProductDetails from "./pages/ProductDetails";
+import Cart from "./pages/Cart";
+import Orders from "./pages/Orders";
 
 function App() {
   return (
@@ -10,10 +17,58 @@ function App() {
       <Route path="/" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route
-        path="/posts"
+        path="/products"
         element={
           <PrivateRoute>
-            <Posts />
+            <Products />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/products/:id"
+        element={
+          <PrivateRoute>
+            <ProductDetails />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/add-product"
+        element={
+          <PrivateRoute>
+            <AddProduct />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/edit-product/:id"
+        element={
+          <PrivateRoute>
+            <EditProduct />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/admin"
+        element={
+          <PrivateRoute>
+            <AdminPanel />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/cart"
+        element={
+          <PrivateRoute>
+            <Cart />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/orders"
+        element={
+          <PrivateRoute>
+            <Orders />
           </PrivateRoute>
         }
       />

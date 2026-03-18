@@ -1,31 +1,35 @@
 import express from "express";
 import cors from "cors";
+import dotenv from "dotenv";
 
 import authRouter from "./api/auth";
-import postRouter from "./api/post";
+import productRoutes from "./api/products";
+import cartRoutes from "./api/cart";
+import orderRoutes from "./api/orders";
+
+dotenv.config();
 
 const app = express();
 
-// Middleware
 app.use(express.json());
 
 app.use(
   cors({
-    origin: "http://localhost:5173", // фронтенд Vite
+    origin: "http://localhost:5173",
     credentials: true,
   })
 );
 
-// Routes
 app.use("/api/auth", authRouter);
-app.use("/api/posts", postRouter);
+app.use("/api/products", productRoutes);
+app.use("/api/cart", cartRoutes);
+app.use("/api/orders", orderRoutes);
 
-// Проверка сервера
-app.get("/", (req, res) => {
+app.get("/", (_req, res) => {
   res.status(200).json({ status: "Server is running" });
 });
 
-const PORT = 3000;
+const PORT = Number(process.env.PORT) || 3000;
 
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
