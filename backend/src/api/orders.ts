@@ -24,6 +24,7 @@ function getUserFromToken(req: any) {
   }
 }
 
+// CHECKOUT
 router.post("/checkout", async (req: any, res) => {
   try {
     const user = getUserFromToken(req);
@@ -60,6 +61,7 @@ router.post("/checkout", async (req: any, res) => {
             product: true,
           },
         },
+        user: true,
       },
     });
 
@@ -74,6 +76,7 @@ router.post("/checkout", async (req: any, res) => {
   }
 });
 
+// USER ORDERS OR ALL ORDERS FOR ADMIN
 router.get("/", async (req: any, res) => {
   try {
     const user = getUserFromToken(req);
@@ -83,8 +86,9 @@ router.get("/", async (req: any, res) => {
     }
 
     const orders = await prisma.order.findMany({
-      where: { userId: user.id },
+      where: user.role === "ADMIN" ? {} : { userId: user.id },
       include: {
+        user: true,
         items: {
           include: {
             product: true,

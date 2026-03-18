@@ -1108,3 +1108,138 @@ body.dark .side-theme-toggle {
 body.dark .side-theme-toggle:hover {
   background: rgba(255, 255, 255, 0.1);
 }
+
+.order-card {
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 20px;
+  border: 1px solid #ede9fe;
+  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.08);
+  margin-bottom: 18px;
+}
+
+body.dark .order-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+}
+
+.order-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.order-card-top h3 {
+  font-size: 24px;
+  margin-bottom: 6px;
+}
+
+.order-card-top p {
+  opacity: 0.8;
+}
+
+.order-total-box {
+  background: #f5f3ff;
+  color: #6d28d9;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-weight: 800;
+  border: 1px solid #ddd6fe;
+}
+
+body.dark .order-total-box {
+  background: rgba(255, 255, 255, 0.08);
+  color: #f3edff;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.order-user-box {
+  background: #faf5ff;
+  border: 1px solid #ede9fe;
+  border-radius: 14px;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+  color: #4c1d95;
+}
+
+body.dark .order-user-box {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #f3edff;
+}
+
+.order-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.order-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 0;
+  border-top: 1px solid #f3f0ff;
+}
+
+body.dark .order-item-row {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.order-item-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.order-item-image {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 14px;
+  background: #f5f3ff;
+}
+
+body.dark .order-item-image {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.order-item-left h4 {
+  margin-bottom: 4px;
+  font-size: 16px;
+}
+
+.order-item-left p {
+  opacity: 0.8;
+  font-size: 14px;
+}
+
+.order-item-price {
+  font-weight: 800;
+  color: #7c3aed;
+  white-space: nowrap;
+}
+
+body.dark .order-item-price {
+  color: #c7a7ff;
+}
+
+@media (max-width: 700px) {
+  .order-item-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .order-item-left {
+    align-items: flex-start;
+  }
+
+  .order-item-price {
+    padding-left: 78px;
+  }
+}
