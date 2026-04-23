@@ -10,6 +10,8 @@ import PrivateRoute from "./components/PrivateRoute";
 import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 import Orders from "./pages/Orders";
+import Support from "./pages/Support";
+import AdminSupport from "./pages/AdminSupport";
 
 function App() {
   return (
@@ -69,6 +71,22 @@ function App() {
         element={
           <PrivateRoute>
             <Orders />
+          </PrivateRoute>
+        }
+      />
+            <Route
+        path="/support"
+        element={
+          <PrivateRoute>
+            <Support />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/admin/support"
+        element={
+          <PrivateRoute>
+            <AdminSupport />
           </PrivateRoute>
         }
       />

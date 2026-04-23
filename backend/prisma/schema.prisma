@@ -23,6 +23,8 @@ model User {
   products  Product[]
   cartItems CartItem[]
   orders    Order[]
+  supportChats    SupportChat[]
+  supportMessages SupportMessage[]
 }
 
 model Product {
@@ -79,4 +81,36 @@ model OrderItem {
 
   @@index([orderId])
   @@index([productId])
+}
+
+enum SupportChatStatus {
+  OPEN
+  CLOSED
+}
+
+model SupportChat {
+  id        Int               @id @default(autoincrement())
+  userId    Int
+  status    SupportChatStatus @default(OPEN)
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+
+  user      User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages  SupportMessage[]
+
+  @@index([userId])
+}
+
+model SupportMessage {
+  id        Int         @id @default(autoincrement())
+  chatId    Int
+  senderId  Int
+  text      String
+  createdAt DateTime    @default(now())
+
+  chat      SupportChat @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  sender    User        @relation(fields: [senderId], references: [id], onDelete: Cascade)
+
+  @@index([chatId])
+  @@index([senderId])
 }

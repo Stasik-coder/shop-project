@@ -1,10 +1,14 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
-const JWT_SECRET = "supersecret";
+const JWT_SECRET = process.env.JWT_SECRET || "supersecret";
 
 export interface AuthRequest extends Request {
-  userId?: number;
+  user?: {
+    id: number;
+    role: "USER" | "ADMIN";
+    email: string;
+  };
 }
 
 export const authMiddleware = (
@@ -14,15 +18,20 @@ export const authMiddleware = (
 ) => {
   const authHeader = req.headers.authorization;
 
-  if (!authHeader) {
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return res.status(401).json({ error: "No token" });
   }
 
   const token = authHeader.split(" ")[1];
 
   try {
-    const decoded = jwt.verify(token, JWT_SECRET) as { userId: number };
-    req.userId = decoded.userId;
+    const decoded = jwt.verify(token, JWT_SECRET) as {
+      id: number;
+      role: "USER" | "ADMIN";
+      email: string;
+    };
+
+    req.user = decoded;
     next();
   } catch {
     return res.status(401).json({ error: "Invalid token" });

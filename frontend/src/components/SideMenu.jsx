@@ -142,6 +142,25 @@ function SideMenu() {
           )}
 
           <button
+            className="side-menu-link"
+            onClick={() => {
+              setMenuOpen(false);
+              navigate("/support");
+            }}
+          >
+            Support
+          </button>
+          <button
+            className="side-menu-link"
+            onClick={() => {
+              setMenuOpen(false);
+              navigate("/admin/support");
+            }}
+          >
+            Support chats
+          </button>
+
+          <button
             className="side-menu-link danger"
             onClick={() => {
               setMenuOpen(false);
